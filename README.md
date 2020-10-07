@@ -11,7 +11,7 @@ This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDU
 By participating, you are expected to uphold this code. Please report unacceptable behavior to info@globalprivacycontrol.org.
 
 ## Getting Involved
-Please email info@globalprivacycontrol.org if you want more information or are interested in contributing.
+Please email info@globalprivacycontrol.org if you would like more information or are interested in contributing.
 
 ## License
 Apart from any logos or marks that may be contained in this repo, this work is licensed under a
@@ -20,8 +20,8 @@ Apart from any logos or marks that may be contained in this repo, this work is l
 [![CC BY 4.0][cc-by-image]][cc-by]
 
 ## Resources
-- Read [initiative site](https://globalprivacycontrol.org) to learn more about the proposed standard and who is involved
-- Visit [test site](https://global-privacy-control.glitch.me) to see how to interact with the GPC signal
+- Visit [initiative site](https://globalprivacycontrol.org) to learn more about the proposed standard and who is involved
+- Check out [test site](https://global-privacy-control.glitch.me) to learn how to interact with the GPC signal
 
 [cc-by]: http://creativecommons.org/licenses/by/4.0/
 [cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
