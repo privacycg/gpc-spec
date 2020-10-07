@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" async class="remove"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%220.9em%22 font-size=%22105%22>🕹</text></svg>">
+    <title>Global Privacy Control (GPC)</title>
+    <script class="remove">
+      var respecConfig = {
+        specStatus: 'unofficial',
+        editors: [
+          {
+            name: 'Robin Berjon',
+            company: 'The New York Times',
+            companyURL: 'https://nytimes.com/',
+            url: 'https://berjon.com/',
+          },
+          {
+            name: 'Sebastian Zimmeck',
+            company: 'Wesleyan University',
+            companyURL: 'https://www.wesleyan.edu/',
+            url: 'https://privacy-tech-lab.github.io/',
+          },
+          {
+            name: 'Ashkan Soltani',
+            company: 'Independent',
+            companyURL: 'https://ashkansoltani.org',
+            url: 'https://ashkansoltani.org',
+          },
+          {
+            name: 'David Harbage',
+            company: 'DuckDuckGo',
+            companyURL: 'https://duckduckgo.com/',
+            url: 'https://davidharbage.com/',
+          },
+          {
+            name: 'Peter Snyder',
+            company: 'Brave Software',
+            companyURL: 'https://brave.com/',
+            url: 'https://www.peteresnyder.com/',
+          },
+        ],
+        shortName: 'gpc',
+        github: 'https://github.com/globalprivacycontrol/gpc-spec',
+        edDraftURI: 'https://globalprivacycontrol.github.io/gpc-spec/',
+        localBiblio: {
+          'CCPA-AG-FINAL-STATEMENT': {
+            title: 'California Attorney General CCPA Final Statement of Reasons',
+            href: 'https://oag.ca.gov/sites/all/files/agweb/pdfs/privacy/ccpa-fsor.pdf',
+          },
+          'CCPA-REGULATIONS': {
+            title: 'CCPA Regulations',
+            href: 'https://www.oag.ca.gov/sites/all/files/agweb/pdfs/privacy/oal-sub-final-text-of-regs.pdf?',
+          },
+          'EPRIVACY-DIRECTIVE': {
+            title: ' Directive 2009/136/EC (ePrivacy Directive)',
+            href: 'https://edps.europa.eu/data-protection/our-work/publications/legislation/directive-2009136ec_en',
+          },
+          'GDPR': {
+            title: 'General Data Protection Regulation (GDPR)',
+            href: 'https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679&from=EN',
+          },
+          'SB220': {
+            title: 'Nevada SB220 (NRS 603A)',
+            href: 'https://www.leg.state.nv.us/NRS/NRS-603A.html',
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <section id="abstract">
+      <p>
+        This document defines a signal, transmitted over HTTP and through the DOM, that conveys a
+        user's request to websites and services to not sell or share their personal information with
+        third parties. This standard is intended to work with existing and upcoming legal frameworks
+        that render such requests enforceable.
+      </p>
+    </section>
+    <section id="sotd"></section>
+    <section>
+      <h2>Introduction</h2>
+      <p>
+        Building websites today often requires relying on services provided by businesses other than
+        the one which the user choses to interact with. This result is a natural consequence of the
+        increasing complexity of Web technology and of the division of labor between different
+        services. While this architecture can be used in the service of better Web experiences,
+        it can also be abused to violate user privacy.
+      </p>
+      <p>
+        Several legal frameworks exist — and more are on the way — within which users have the right
+        to request that their privacy be protected, including requests that their data not be sold
+        or shared beyond the business with which they intend to interact. Requiring that users
+        express their rights for each and every site they visit is, however, impractical.
+      </p>
+      <blockquote cite="https://oag.ca.gov/sites/all/files/agweb/pdfs/privacy/ccpa-fsor.pdf">
+        <p>
+          Given the ease and frequency by which personal information is collected and sold when a
+          consumer visits a website, consumers should have a similarly easy ability to request to
+          opt-out globally. This regulation offers consumers a global choice to opt-out of the sale
+          of personal information, as opposed to going website by website to make individual
+          requests with each business each time they use a new browser or a new device.
+          [[CCPA-AG-FINAL-STATEMENT]]
+        </p>
+      </blockquote>
+      <p>
+        This specification addresses the issue by providing a way to signal, through an HTTP header
+        or the DOM, a user's assertion of their applicable rights to prevent selling their data to
+        third parties or sharing data with them. This signal is equivalent, for example, to the
+        "global privacy control" in the CCPA [[CCPA-REGULATIONS]].
+      </p>
+    </section>
+    <section>
+      <h2>Definitions</h2>
+      <p>
+        The terms <dfn>effective script origin</dfn>, <dfn>top-level browsing context</dfn>,
+        <dfn>document.domain</dfn>, <dfn>responsible document</dfn>,
+        and <dfn>active document</dfn> are defined in [[HTML]], as is the
+        <code><dfn data-cite="!HTML/#the-navigator-object">Navigator</dfn></code>
+        interface.
+      </p>
+      <p>
+        The term <dfn>target resource</dfn> is defined in HTTP/1.1 syntax [[RFC7230]]
+        and semantics [[RFC7231]].
+      </p>
+      <p>
+        A <dfn>do-not-sell-or-share interaction</dfn> is an interaction with a website in which the
+        user is requesting that their data not be sold to or shared with any party other than the one
+        the user intends to interact with, except as permitted by law.
+      </p>
+    </section>
+    <section>
+      <h2>Expressing a Do Not Sell Or Share Preference</h2>
+      <section>
+        <h3>Expression Format</h3>
+        <p>
+          If a user has requested that their data "not be sold or shared" via setting a Global Privacy Control
+          preference, that preference needs to be expressed to all mechanisms that might collect data
+          from or share data with third parties.
+        </p>
+        <p>
+          If set, this preference is expressed as a single value of <code>1</code> or equivalently
+          <code>true</code> according to context, which conveys the fact that a user is requesting a
+          <a>do-not-sell-or-share interaction</a>.
+        </p>
+        <p>
+          A user agent MUST NOT expose or send a Global Privacy Control preference expression if a
+          Global Privacy Control preference is not enabled.
+        </p>
+        <p>
+          In the absence of regulatory, legal, or other requirements, servers MAY interpret an
+          expressed Global Privacy Control preference as they find most appropriate for the given
+          user, particularly as considered in light of the user's privacy expectations, context, and
+          cultural circumstances. Likewise, servers might make use of other preference information
+          outside the scope of this protocol, such as site-specific user preferences or third-party
+          registration services, to inform or adjust their behavior when no explicit preference is
+          expressed via this protocol.
+        </p>
+        <p>
+      </section>
+      <section>
+        <h3>The <code>Sec-GPC</code> Header Field for HTTP Requests</h3>
+        <p>
+          The <dfn><code>Sec-GPC</code></dfn> header field is a mechanism for expressing the user's
+          preference for a <a>do-not-sell-or-share interaction</a> in an HTTP request. At most one
+          <code>Sec-GPC</code> header field can be present in a valid request.
+        </p>
+        <pre class="hljs">
+          Sec-GPC-field-name  = "Sec-GPC"
+          Sec-GPC-field-value = "1"
+        </pre>
+        <p>
+          A user agent MUST NOT generate a <code>Sec-GPC</code> header field if the user's Global
+          Privacy Control preference is not enabled.
+        </p>
+        <p>
+          A user agent MUST generate a <code>Sec-GPC</code> header field with a field-value that
+          is exactly the numeric character "1" if the user's Global Privacy Control preference is
+          set.
+        </p>
+        <aside class="example" title="Example GPC Request">
+          <pre class="hljs http">
+            GET /something/here HTTP/1.1
+            Host: example.com
+            Sec-GPC: 1
+          </pre>
+        </aside>
+        <section>
+          <h4>
+            Extensibility of the Sec-GPC Field Value
+          </h4>
+          <p>
+            The <a><code>Sec-GPC</code></a> is deliberately defined without an extension mechanism.
+            Experience with previous similar headers shows that people tend to rely on string
+            equality instead of parsing the value when testing for their presence, especially when
+            extensions do not yet exist. Such checks would of course fail in the presence of
+            extension content, which would in turn render the mechanism moot. Should extensions
+            prove necessary to this standard, they will need to be implemented through other
+            headers, which may in time supercede this one.
+          </p>
+        </section>
+      </section>
+      <section>
+        <h2>JavaScript Property to Detect Preference</h2>
+        <p>
+          The <code><dfn>Navigator.globalPrivacyControl</dfn></code> property enables a client-side
+          script to determine what <a><code>Sec-GPC</code></a> header field value would be sent to
+          the <a>effective script origin</a> when referenced by the active document's <a>top-level
+          browsing context</a>.
+        </p>
+        <pre class="idl">
+          partial interface Navigator {
+            readonly attribute boolean globalPrivacyControl;
+          };
+        </pre>
+        <p>
+          The value is <code>false</code> if no <code>Sec-GPC</code> header field would be sent;
+          otherwise, the value is <code>true</code>.
+        </p>
+        <p>
+          Specifically, the value of <a>Navigator.globalPrivacyControl</a> for a given script is
+          <code>true</code> if a <a>Sec-GPC</a> header set to <code>1</code> is sent in a request to
+          a <a>target resource</a> at the <a>effective script origin</a> (the current
+          <a>document.domain</a> of the script's <a>responsible document</a>) when that request is
+          due to an embedded reference from this site (the <a>document.domain</a> of the
+          <a>top-level browsing context</a>'s <a>active document</a>). Otherwise, it is
+          <code>false</code>.
+        </p>
+        <p>
+          Ideally, the value of <a>Navigator.globalPrivacyControl</a> ought to reflect the preference
+          of the user when the attribute is read. In practice, however, the value might only reflect
+          the value that was in effect when the script was initiated.
+        </p>
+      </section>
+      <section>
+        <h2>Default Value</h2>
+        <p>
+          The <code>Sec-GPC</code> signal sent MUST reflect the user's preference, not the choice of
+          some vendor, institution, site, or network-imposed mechanism outside the user's control.
+          The basic principle is that a <code>Sec-GPC</code> preference expression is only
+          transmitted if it reflects a deliberate choice by the user. What constitutes a
+          deliberate choice may differ between regional regulations. For example, regulations in one
+          jurisdiction may consider the use of a privacy-focused browser to imply a
+          <code>Sec-GPC</code> preference, such as under the CCPA
+          <a href="https://oag.ca.gov/sites/all/files/agweb/pdfs/privacy/ccpa-fsor-appendix-e.pdf">Final
+          Statement of Reasons - Appendix E #73</a><em> ("The consumer exercises their choice by
+          affirmatively choosing the privacy control, including when utilizing privacy-by-design
+          products or services</em>"), while regulations in another jurisdiction may require
+          explicit consent from the user to send a <code>Sec-GPC</code> preference.
+        </p>
+        <p>
+          It should be noted that users' preferences for privacy is well established, and user agents
+          are expected to convey user preferences as accurately as they can. To the extent possible,
+          user agents SHOULD strive to represent user preferences, including if necessary by
+          prompting users to decide whether they would prefer to have their data sold or not.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h2>GPC Support Resource</h2>
+      <p>
+        A site MAY produce a resource at a .well-known URL in order for a site to represent the fact
+        that it abides by GPC.
+      </p>
+      <p>
+        A GPC Support Resource has the well-known identifier <code>/.well-known/gpc</code>
+        relative to the origin server's URL [[RFC5785]].
+      </p>
+      <p>
+        An origin server that receives a valid GET request targeting its GPC support status
+        resource MUST send either a successful response containing a machine-readable
+        representation of the site-wide tracking status, as defined below, or a sequence of
+        redirects that leads to such a representation (possibly provided by a server at another
+        origin).
+      </p>
+      <section>
+        <h2>GPC Support Representation</h2>
+        <p>
+          The origin server MUST return the GPC support resource as a valid representation using the
+          <code>application/json</code> media type [[RFC8259]].
+        </p>
+        <p>
+          The GPC support representation MUST be an
+          <a href="https://infra.spec.whatwg.org/#ordered-map">ordered map</a>.
+          The unordered map MUST have a the following members (all other values MUST be ignored):
+          <ul>
+            <li>
+              A <code>gpc</code> member. The value of the <code>gpc</code> member MUST be either
+              <code>true</code>, to indicate that the server intends to abide by GPC requests, or
+              <code>false</code>, to indicate that it does not.
+            </li>
+            <li>
+              A <code>version</code> member. The value of the <code>version</code>
+              member MUST be the number <code>1</code>.
+            </li>
+          </ul>
+        </p>
+        <aside class="example" title="example.org abides by GPC">
+          <pre class="http">
+            GET /.well-known/gpc HTTP/1.1
+            Host: example.org
+            User-Agent: whatever
+
+
+            Content-Type: application/json
+
+            {
+              "gpc": true,
+              "version": 1
+            }
+          </pre>
+        </aside>
+      </section>
+    </section>
+    <section>
+      <h2>Legal Effects</h2>
+      <p>
+        During the initial experimental phase, the GPC signal is not intended to convey legally
+        binding requests; it is instead intended as way to test effective protocols for
+        communicating and complying with user requests to stop the sale or sharing of their personal
+        information.
+      </p>
+      <p>
+        After the experimental phase, receiving a GPC signal may have legal effects, depending on
+        factors such as the location of the individual sending the signal, the scope of the
+        applicable law, as well as any separate agreement between the recipient of the signal and
+        the individual.
+      </p>
+      <p>
+        For example, the use of the GPC signal by an individual will be intended to communicate the
+        individual's intention to invoke the following rights, as applicable:
+      </p>
+      <ul>
+        <li>
+          <p>
+            Under the CCPA, the GPC signal will be intended to communicate a Do Not Sell request
+            from a global privacy control, as per [[CCPA-REGULATIONS]] §999.315 for that browser or
+            device, or, if known, the consumer.
+          </p>
+          <p>
+            Where the GPC signal conflicts with the existing privacy settings a consumer has with
+            the business, the business shall respect the GPC signal but may notify the consumer of
+            the conflict and give the consumer an opportunity to confirm the business-specific
+            privacy setting or participation in the financial incentive program [[CCPA-REGULATIONS]]
+            §999.315(c)(2).
+          </p>
+        </li>
+        <li>
+          <p>
+            Under NRS 603A, a GPC signal will be intended to communicate a Do Not Sell My Personal
+            Information request [[SB220]].
+          </p>
+        </li>
+        <li>
+          <p>
+            The GDPR requires that "Natural persons should have control of their own personal data"
+            ([[GDPR]], Recital 7). The GPC signal is intended to convey a general request that data
+            controllers limit the sale or sharing of the user's personal data to other data
+            controllers ([[GDPR]] Articles 7 &amp; 21). This request is expressed with every
+            interaction that the user agent has with the server.
+          </p>
+          <p>
+            Note that this request is not meant to withdraw a user's consent to local storage as per
+            the ePrivacy Directive ("cookie consent") ([[EPRIVACY-DIRECTIVE]]) nor is it intended to
+            object to direct marketing under legitimate interest ([[GDPR]]).
+          </p>
+        </li>
+      </ul>
+      <p>
+        Given the complexities of existing consent frameworks, publishers who accept the GPC signal
+        should disclose how they treat the GPC signal in that jurisdiction and how they deal with
+        conflicts between the signal and other specific privacy choices that the user has already
+        made directly with the publisher, including instances where third party sharing may be
+        permitted such as sharing to service providers/processors, sharing at law or at the
+        direction of the individual.
+      </p>
+      <section>
+        <h2>User Interface Language</h2>
+        <p>
+          Studies have shown that users do not want their data sold or shared. However, in some
+          jurisdictions they can only avail themselves of that preference by explicitly asserting
+          control.
+        </p>
+        <p>
+          User agents are expected, where required, to present all the appropriate notices to users
+          to ensure that the rights they wish to avail themselves of are effectively binding.
+        </p>
+      </section>
+    </section>
+    <section id="conformance"></section>
+    <section class="appendix">
+      <h2>Implementation Considerations</h2>
+      <p>
+        It is worth considering that a GPC signal will be attached to every HTTP request made to a
+        given site. Rendering a page on the Web often requires making dozens such requests. As such
+        it can prove impractical for GPC signals to trigger full-blown opt-out procedures with
+        costly audit trails for every single GPC interaction as that will cause a large amount of
+        processing, including for resources served from a content delivery network (CDN) that must
+        be executed as efficiently as possible.
+      </p>
+      <p>
+        Regulations that intend to support GPC are encouraged to consider such implementation
+        difficulties. One way of addressing them is to differentiate between user interface
+        affordances given to users for the purpose of requesting a <a>do-not-sell-or-share
+        interaction</a> preference to persist on the site, and the provision of a
+        <a>do-not-sell-or-share interaction</a> signal the state of which is maintained with the
+        user agent. In the latter case, the interaction can be processed as if the user had
+        previously requested such a <a>do-not-sell-or-share interaction</a> preference and were
+        interacting with that preference already active.
+      </p>
+    </section>
+  </body>
+</html>
