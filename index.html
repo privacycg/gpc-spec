@@ -144,10 +144,6 @@
           <a>do-not-sell-or-share interaction</a>.
         </p>
         <p>
-          A user agent MUST NOT expose or send a Global Privacy Control preference expression if a
-          Global Privacy Control preference is not enabled.
-        </p>
-        <p>
           In the absence of regulatory, legal, or other requirements, servers MAY interpret an
           expressed Global Privacy Control preference as they find most appropriate for the given
           user, particularly as considered in light of the user's privacy expectations, context, and
@@ -157,6 +153,11 @@
           expressed via this protocol.
         </p>
         <p>
+          User agents are expected to convey user preferences as accurately
+          as they can. User agents SHOULD strive to represent what the user
+          agent best believes to be the user's preference for the Global
+          Privacy Control value.
+        </p>
       </section>
       <section>
         <h3>The <code>Sec-GPC</code> Header Field for HTTP Requests</h3>
@@ -230,29 +231,6 @@
           Ideally, the value of <a>Navigator.globalPrivacyControl</a> ought to reflect the preference
           of the user when the attribute is read. In practice, however, the value might only reflect
           the value that was in effect when the script was initiated.
-        </p>
-      </section>
-      <section>
-        <h2>Default Value</h2>
-        <p>
-          The <code>Sec-GPC</code> signal sent MUST reflect the user's preference, not the choice of
-          some vendor, institution, site, or network-imposed mechanism outside the user's control.
-          The basic principle is that a <code>Sec-GPC</code> preference expression is only
-          transmitted if it reflects a deliberate choice by the user. What constitutes a
-          deliberate choice may differ between regional regulations. For example, regulations in one
-          jurisdiction may consider the use of a privacy-focused browser to imply a
-          <code>Sec-GPC</code> preference, such as under the CCPA
-          <a href="https://oag.ca.gov/sites/all/files/agweb/pdfs/privacy/ccpa-fsor-appendix-e.pdf">Final
-          Statement of Reasons - Appendix E #73</a><em> ("The consumer exercises their choice by
-          affirmatively choosing the privacy control, including when utilizing privacy-by-design
-          products or services</em>"), while regulations in another jurisdiction may require
-          explicit consent from the user to send a <code>Sec-GPC</code> preference.
-        </p>
-        <p>
-          It should be noted that users' preferences for privacy is well established, and user agents
-          are expected to convey user preferences as accurately as they can. To the extent possible,
-          user agents SHOULD strive to represent user preferences, including if necessary by
-          prompting users to decide whether they would prefer to have their data sold or not.
         </p>
       </section>
     </section>
