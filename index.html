@@ -220,12 +220,8 @@
         </p>
         <p>
           Specifically, the value of <a>Navigator.globalPrivacyControl</a> for a given script is
-          <code>true</code> if a <a>Sec-GPC</a> header set to <code>1</code> is sent in a request to
-          a <a>target resource</a> at the <a>effective script origin</a> (the current
-          <a>document.domain</a> of the script's <a>responsible document</a>) when that request is
-          due to an embedded reference from this site (the <a>document.domain</a> of the
-          <a>top-level browsing context</a>'s <a>active document</a>). Otherwise, it is
-          <code>false</code>.
+          <code>true</code> if a user has requested that their data "not be sold or shared" via
+          setting a Global Privacy Control preference.
         </p>
         <p>
           Ideally, the value of <a>Navigator.globalPrivacyControl</a> ought to reflect the preference
