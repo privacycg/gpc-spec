@@ -238,38 +238,45 @@
       <h2>GPC Support Resource</h2>
       <p>
         A site MAY produce a resource at a .well-known URL in order for a site to represent the fact
-        that it abides by GPC.
+        that it abides by GPC. The purpose of a GPC Support Resource is for a site to convey its
+        support for the Global Privacy Control. By default, an origin's support is <em>unknown</em>.
       </p>
       <p>
         A GPC Support Resource has the well-known identifier <code>/.well-known/gpc.json</code>
         relative to the origin server's URL [[RFC5785]].
       </p>
       <p>
-        An origin server that receives a valid GET request targeting its GPC support status
-        resource MUST send either a successful response containing a machine-readable
-        representation of the site-wide tracking status, as defined below, or a sequence of
-        redirects that leads to such a representation (possibly provided by a server at another
-        origin).
+        An origin server that receives a valid GET request targeting its GPC support resource
+        responds either with a successful response containing a machine-readable representation of
+        the site-wide tracking status, as defined below, or a sequence of redirects that leads to
+        such a representation (which MAY be provided by a server at another origin).
       </p>
       <section>
         <h2>GPC Support Representation</h2>
         <p>
           The origin server MUST return the GPC support resource as a valid representation using the
-          <code>application/json</code> media type [[RFC8259]].
+          <code>application/json</code> media type [[RFC8259]], otherwise the origin's support is
+          unknown.
         </p>
         <p>
           The GPC support representation MUST be an
-          <a href="https://tools.ietf.org/html/rfc8259#section-4">JSON object</a>.
-          The JSON object MUST have a the following members (all other values MUST be ignored):
+          <a href="https://tools.ietf.org/html/rfc8259#section-4">JSON object</a>, otherwise the
+          origin's support is unknown. Members of this JSON object not in the list below have no
+          meaning in this specification and MUST be ignored. Members include:
           <ul>
             <li>
               A <code>gpc</code> member. The value of the <code>gpc</code> member MUST be either
               <code>true</code>, to indicate that the server intends to abide by GPC requests, or
-              <code>false</code>, to indicate that it does not.
+              <code>false</code>, to indicate that it does not. For any other value the origin's
+              support is unknown.
             </li>
             <li>
-              A <code>version</code> member. The value of the <code>version</code>
-              member MUST be the number <code>1</code>.
+              A <code>lastUpdate</code> member. The value of the <code>lastUpdate</code>
+              member MUST an ISO 8601 date or date and time [[ISO8601]]. This indicates the time at
+              which the statement of support was made, such that later changes to the meaning of the
+              GPC standard should not affect the interpretation of the resource for legal purposes.
+              If the member is not in a valid ISO 8601 format, the last update date and time is
+              unknown.
             </li>
           </ul>
         </p>
@@ -284,7 +291,7 @@
 
             {
               "gpc": true,
-              "version": 1
+              "lastUpdate": "1997-03-10"
             }
           </pre>
         </aside>
