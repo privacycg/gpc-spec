@@ -17,9 +17,11 @@
         postProcess: [(config, doc) => {
           let time = doc.querySelector('.head h2 time')
             , h2 = doc.querySelector('.head h2')
+            , abs = doc.querySelector('#sotd > p')
           ;
           h2.innerHTML = 'Proposal ';
           h2.appendChild(time);
+          abs.textContent = 'This document is a specification proposal.';
         }],
         editors: [
           {
