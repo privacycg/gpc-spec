@@ -5,9 +5,22 @@
     <script src="https://www.w3.org/Tools/respec/respec-w3c" async class="remove"></script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%220.9em%22 font-size=%22105%22>🕹</text></svg>">
     <title>Global Privacy Control (GPC)</title>
+    <style>
+      body {
+        background: url(proposal.svg) no-repeat fixed !important;
+        background-size: 25px 380px !important;
+      }
+    </style>
     <script class="remove">
       var respecConfig = {
         specStatus: 'unofficial',
+        postProcess: [(config, doc) => {
+          let time = doc.querySelector('.head h2 time')
+            , h2 = doc.querySelector('.head h2')
+          ;
+          h2.innerHTML = 'Proposal ';
+          h2.appendChild(time);
+        }],
         editors: [
           {
             name: 'Robin Berjon',
