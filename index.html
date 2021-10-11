@@ -58,6 +58,7 @@
         shortName: 'gpc',
         github: 'https://github.com/globalprivacycontrol/gpc-spec',
         edDraftURI: 'https://globalprivacycontrol.github.io/gpc-spec/',
+        xref: ['html'],
         localBiblio: {
           'CCPA-AG-FINAL-STATEMENT': {
             title: 'California Attorney General CCPA Final Statement of Reasons',
@@ -225,9 +226,11 @@
           browsing context</a>.
         </p>
         <pre class="idl">
-          partial interface Navigator {
+          interface mixin GlobalPrivacyControl {
             readonly attribute boolean globalPrivacyControl;
           };
+          Navigator includes GlobalPrivacyControl;
+          WorkerNavigator includes GlobalPrivacyControl;
         </pre>
         <p>
           The value is <code>false</code> if no <code>Sec-GPC</code> header field would be sent;
