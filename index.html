@@ -156,10 +156,10 @@
           <code>true</code> according to context.
         </p>
         <p>
-          In the absence of regulatory, legal, or other requirements, Web sites MAY interpret an
+          In the absence of regulatory, legal, or other requirements, websites MAY interpret an
           expressed Global Privacy Control [=preference=] as they find most appropriate for the given
           person, particularly as considered in light of the person's privacy expectations, context, and
-          cultural circumstances. Likewise, Web sites might make use of other [=preference=] information
+          cultural circumstances. Likewise, websites might make use of other [=preference=] information
           outside the scope of this protocol, such as site-specific person [=preferences=] or third-party
           registration services, to inform or adjust their behavior when no explicit [=preference=] is
           expressed via this protocol.
@@ -174,21 +174,40 @@
         <h3>The <code>Sec-GPC</code> Header Field for HTTP Requests</h3>
         <p>
           The <dfn><code>Sec-GPC</code></dfn> header field is a mechanism for expressing the person's
-          [=preference=] for a [=do-not-sell-or-share interaction=] in an HTTP request. At most one
-          <code>Sec-GPC</code> header field can be present in a valid request.
+          [=preference=] for a [=do-not-sell-or-share interaction=] in an HTTP request (for any
+          request method).
         </p>
         <pre class="hljs">
           Sec-GPC-field-name  = "Sec-GPC"
           Sec-GPC-field-value = "1"
         </pre>
         <p>
-          A user agent MUST NOT generate a <code>Sec-GPC</code> header field if the person's Global
+          A user agent MUST NOT generate a <code>[=Sec-GPC=]</code> header field if the person's Global
           Privacy Control [=preference=] is not enabled or defaulted to.
         </p>
         <p>
-          A user agent MUST generate a <code>Sec-GPC</code> header field with a field-value that
+          A user agent MUST generate a <code>[=Sec-GPC=]</code> header field with a field-value that
           is exactly the numeric character "1" if the person's Global Privacy Control [=preference=]
           is set.
+        </p>
+        <p>
+          A user agent MUST NOT generate more than one <code>[=Sec-GPC=]</code> in a given HTTP
+          request and MUST NOT use a <code>[=Sec-GPC=]</code> field in an HTTP trailer.
+        </p>
+        <p>
+          A server processing an HTTP request that contains a <code>[=Sec-GPC=]</code> header MUST
+          ignore it and process the request as if that header had not been specified unless the
+          field value is exactly the character "1". If there are multiple <code>[=Sec-GPC=]</code>
+          headers and at least one has a field value of exactly "1" then the server MUST treat the
+          request as if there were only one <code>[=Sec-GPC=]</code> header with a field value of
+          "1"; and as if there were none otherwise.
+        </p>
+        <p>
+          HTTP intermediaries MUST NOT remove a <code>[=Sec-GPC=]</code> header set to "1", but they
+          MAY remove <code>[=Sec-GPC=]</code> headers that contain other values. Additionally, an
+          HTTP intermediary that has reasons to believe the the person originating a given HTTP
+          request has a [=do-not-sell-or-share preference=], MAY insert a <code>[=Sec-GPC=]</code>
+          header set to "1".
         </p>
         <aside class="example" title="Example GPC Request">
           <pre class="hljs http">
