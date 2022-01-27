@@ -117,14 +117,14 @@
           opt-out globally. This regulation offers consumers a global choice to opt-out of the sale
           of personal information, as opposed to going website by website to make individual
           requests with each business each time they use a new browser or a new device.
-          [[CCPA-AG-FINAL-STATEMENT]]
+          [[?CCPA-AG-FINAL-STATEMENT]]
         </p>
       </blockquote>
       <p>
         This specification addresses the issue by providing a way to signal, through an HTTP header
         or the DOM, a person's assertion of their applicable rights to prevent selling their data to
         third parties or sharing data with them. This signal is equivalent, for example, to the
-        "global privacy control" in the CCPA [[CCPA-REGULATIONS]].
+        "global privacy control" in the CCPA [[?CCPA-REGULATIONS]].
       </p>
     </section>
     <section>
@@ -177,6 +177,9 @@
           [=preference=] for a [=do-not-sell-or-share interaction=] in an HTTP request (for any
           request method).
         </p>
+        <p>
+          The syntax ([[ABNF]]) of the field is:
+        </p>
         <pre class="hljs">
           Sec-GPC-field-name  = "Sec-GPC"
           Sec-GPC-field-value = "1"
@@ -211,7 +214,7 @@
         </p>
         <aside class="example" title="Example GPC Request">
           <pre class="hljs http">
-            GET /something/here HTTP/1.1
+            GET /something/here HTTP/2
             Host: example.com
             Sec-GPC: 1
           </pre>
@@ -321,7 +324,7 @@
         </p>
         <aside class="example" title="example.org abides by GPC">
           <pre class="http">
-            GET /.well-known/gpc.json HTTP/1.1
+            GET /.well-known/gpc.json HTTP/2
             Host: example.org
             User-Agent: whatever
 
@@ -352,14 +355,14 @@
         <li>
           <p>
             Under the CCPA, the GPC signal will be intended to communicate a Do Not Sell request
-            from a global privacy control, as per [[CCPA-REGULATIONS]] §999.315 for that browser or
+            from a global privacy control, as per [[?CCPA-REGULATIONS]] §999.315 for that browser or
             device, or, if known, the consumer.
           </p>
           <p>
             Where the GPC signal conflicts with the existing privacy settings a consumer has with
             the business, the business shall respect the GPC signal but may notify the consumer of
             the conflict and give the consumer an opportunity to confirm the business-specific
-            privacy setting or participation in the financial incentive program [[CCPA-REGULATIONS]]
+            privacy setting or participation in the financial incentive program [[?CCPA-REGULATIONS]]
             §999.315(c)(2).
           </p>
         </li>
@@ -371,21 +374,21 @@
         <li>
           <p>
             Under NRS 603A, a GPC signal will be intended to communicate a Do Not Sell My Personal
-            Information request [[SB220]].
+            Information request [[?SB220]].
           </p>
         </li>
         <li>
           <p>
             The GDPR requires that "Natural persons should have control of their own personal data"
-            ([[GDPR]], Recital 7). The GPC signal is intended to convey a general request that data
+            ([[?GDPR]], Recital 7). The GPC signal is intended to convey a general request that data
             controllers limit the sale or sharing of the person's personal data to other data
-            controllers ([[GDPR]] Articles 7 &amp; 21). This request is expressed with every
+            controllers ([[?GDPR]] Articles 7 &amp; 21). This request is expressed with every
             interaction that the user agent has with the server.
           </p>
           <p>
             Note that this request is not meant to withdraw a person's consent to local storage as per
-            the ePrivacy Directive ("cookie consent") ([[EPRIVACY-DIRECTIVE]]) nor is it intended to
-            object to direct marketing under legitimate interest ([[GDPR]]).
+            the ePrivacy Directive ("cookie consent") ([[?EPRIVACY-DIRECTIVE]]) nor is it intended to
+            object to direct marketing under legitimate interest ([[?GDPR]]).
           </p>
         </li>
       </ul>
