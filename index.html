@@ -131,8 +131,16 @@
       <h2>Definitions</h2>
       <p>
         A <dfn>do-not-sell-or-share interaction</dfn> is an interaction with a website in which the
-        user is requesting that their data not be sold to or shared with any party other than the one
-        the user intends to interact with, except as permitted by law.
+        user is requesting that their data not be sold to or shared with any party other than the
+        one the user intends to interact with, except as permitted by law.
+      </p>
+      <p>
+        A <dfn data-lt="preference">do-not-sell-or-share preference</dfn> is when a person requests
+        that their data "not be sold or shared" for instance by activating a Global Privacy Control
+        setting with their user agent or by using tools that default to such a setting (for
+        instance because this setting matches the most common expectations of that tool's users).
+        When set, this [=preference=] indicates that the person expects to browse the Web with
+        [=do-not-sell-or-share interactions=].
       </p>
     </section>
     <section>
@@ -140,36 +148,33 @@
       <section>
         <h3>Expression Format</h3>
         <p>
-          If a user has requested that their data "not be sold or shared" via setting a Global Privacy Control
-          preference, that preference needs to be expressed to all mechanisms that might collect data
-          from or share data with third parties.
+          A Global Privacy Control [=preference=] needs to be conveyed to all mechanisms that might
+          collect data from or share data with third parties.
         </p>
         <p>
-          If set, this preference is expressed as a single value of <code>1</code> or equivalently
-          <code>true</code> according to context, which conveys the fact that a user is requesting a
-          <a>do-not-sell-or-share interaction</a>.
+          If set, this [=preference=] is expressed as a single value of <code>1</code> or equivalently
+          <code>true</code> according to context.
         </p>
         <p>
-          In the absence of regulatory, legal, or other requirements, servers MAY interpret an
-          expressed Global Privacy Control preference as they find most appropriate for the given
+          In the absence of regulatory, legal, or other requirements, Web sites MAY interpret an
+          expressed Global Privacy Control [=preference=] as they find most appropriate for the given
           user, particularly as considered in light of the user's privacy expectations, context, and
-          cultural circumstances. Likewise, servers might make use of other preference information
-          outside the scope of this protocol, such as site-specific user preferences or third-party
-          registration services, to inform or adjust their behavior when no explicit preference is
+          cultural circumstances. Likewise, Web sites might make use of other [=preference=] information
+          outside the scope of this protocol, such as site-specific user [=preferences=] or third-party
+          registration services, to inform or adjust their behavior when no explicit [=preference=] is
           expressed via this protocol.
         </p>
         <p>
-          User agents are expected to convey user preferences as accurately
-          as they can. User agents SHOULD strive to represent what the user
-          agent best believes to be the user's preference for the Global
-          Privacy Control value.
+          User agents are expected to convey user [=preferences=] as accurately as they can. User
+          agents SHOULD strive to represent what the user agent best believes to be the user's
+          [=preference=] for the Global Privacy Control value.
         </p>
       </section>
       <section>
         <h3>The <code>Sec-GPC</code> Header Field for HTTP Requests</h3>
         <p>
           The <dfn><code>Sec-GPC</code></dfn> header field is a mechanism for expressing the user's
-          preference for a <a>do-not-sell-or-share interaction</a> in an HTTP request. At most one
+          [=preference=] for a [=do-not-sell-or-share interaction=] in an HTTP request. At most one
           <code>Sec-GPC</code> header field can be present in a valid request.
         </p>
         <pre class="hljs">
@@ -178,11 +183,11 @@
         </pre>
         <p>
           A user agent MUST NOT generate a <code>Sec-GPC</code> header field if the user's Global
-          Privacy Control preference is not enabled.
+          Privacy Control [=preference=] is not enabled.
         </p>
         <p>
           A user agent MUST generate a <code>Sec-GPC</code> header field with a field-value that
-          is exactly the numeric character "1" if the user's Global Privacy Control preference is
+          is exactly the numeric character "1" if the user's Global Privacy Control [=preference=] is
           set.
         </p>
         <aside class="example" title="Example GPC Request">
@@ -197,7 +202,7 @@
             Extensibility of the Sec-GPC Field Value
           </h4>
           <p>
-            The <a><code>Sec-GPC</code></a> is deliberately defined without an extension mechanism.
+            The <code>[=Sec-GPC=]</code> is deliberately defined without an extension mechanism.
             Experience with previous similar headers shows that people tend to rely on string
             equality instead of parsing the value when testing for their presence, especially when
             extensions do not yet exist. Such checks would of course fail in the presence of
@@ -210,8 +215,8 @@
       <section>
         <h2>JavaScript Property to Detect Preference</h2>
         <p>
-          The <code><dfn>Navigator.globalPrivacyControl</dfn></code> property enables a client-side
-          script to determine what <a><code>Sec-GPC</code></a> header field value was sent when
+          The {{GlobalPrivacyControl/globalPrivacyControl}} property enables a client-side
+          script to determine what <code>[=Sec-GPC=]</code> header field value was sent when
           loading the [=top-level browsing context=]'s [=active document=].
         </p>
         <pre class="idl">
@@ -226,14 +231,19 @@
           otherwise, the value is <code>true</code>.
         </p>
         <p>
-          Specifically, the value of <a>Navigator.globalPrivacyControl</a> for a given script is
+          Specifically, the value of {{GlobalPrivacyControl/globalPrivacyControl}} for a given script is
           <code>true</code> if a user has requested that their data "not be sold or shared" via
-          setting a Global Privacy Control preference.
+          setting a Global Privacy Control [=preference=].
         </p>
         <p>
-          Ideally, the value of <a>Navigator.globalPrivacyControl</a> ought to reflect the preference
-          of the user when the attribute is read. In practice, however, the value might only reflect
-          the value that was in effect when the script was initiated.
+          Ideally, the value of {{GlobalPrivacyControl/globalPrivacyControl}} ought to reflect the
+          [=preference=] of the user when the attribute is read. In practice, however, the value
+          might only reflect the value that was in effect when the script was initiated.
+        </p>
+        <p>
+          The {{GlobalPrivacyControl/globalPrivacyControl}} property is available on the
+          <code>navigator</code> object in both regular and worker contexts, and so can be checked
+          reading from <code>navigator.globalPrivacyControl</code>.
         </p>
       </section>
     </section>
@@ -366,7 +376,7 @@
         <h2>User Interface Language</h2>
         <p>
           Studies have shown that users do not want their data sold or shared. However, in some
-          jurisdictions they can only avail themselves of that preference by explicitly asserting
+          jurisdictions they can only avail themselves of that [=preference=] by explicitly asserting
           control.
         </p>
         <p>
@@ -389,12 +399,12 @@
       <p>
         Regulations that intend to support GPC are encouraged to consider such implementation
         difficulties. One way of addressing them is to differentiate between user interface
-        affordances given to users for the purpose of requesting a <a>do-not-sell-or-share
-        interaction</a> preference to persist on the site, and the provision of a
-        <a>do-not-sell-or-share interaction</a> signal the state of which is maintained with the
+        affordances given to users for the purpose of requesting a [=do-not-sell-or-share
+        interaction=] [=preference=] to persist on the site, and the provision of a
+        [=do-not-sell-or-share interaction=] signal the state of which is maintained with the
         user agent. In the latter case, the interaction can be processed as if the user had
-        previously requested such a <a>do-not-sell-or-share interaction</a> preference and were
-        interacting with that preference already active.
+        previously requested such a [=do-not-sell-or-share interaction=] [=preference=] and were
+        interacting with that [=preference=] already active.
       </p>
     </section>
     <section class="appendix">
