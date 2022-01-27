@@ -15,14 +15,15 @@
       var respecConfig = {
         specStatus: 'unofficial',
         postProcess: [(config, doc) => {
-           let time = doc.querySelector('#w3c-state time')
-             , h2 = doc.querySelector('#w3c-state')
-             , abs = doc.querySelector('#sotd > p')
-           ;
-           h2.innerHTML = 'Proposal ';
-           h2.appendChild(time);
-           abs.textContent = 'This document is a specification proposal.';
-         }],
+          let time = doc.querySelector('#w3c-state time')
+           , h2 = doc.querySelector('#w3c-state')
+           , abs = doc.querySelector('#sotd > p')
+          ;
+          h2.innerHTML = 'Proposal ';
+          h2.appendChild(time);
+          abs.textContent = 'This document is a specification proposal.';
+        }],
+        xref: ['html'],
         editors: [
           {
             name: 'Robin Berjon',
@@ -129,17 +130,6 @@
     <section>
       <h2>Definitions</h2>
       <p>
-        The terms <dfn>effective script origin</dfn>, <dfn>top-level browsing context</dfn>,
-        <dfn>document.domain</dfn>, <dfn>responsible document</dfn>,
-        and <dfn>active document</dfn> are defined in [[HTML]], as is the
-        <code><dfn data-cite="!HTML/#the-navigator-object">Navigator</dfn></code>
-        interface.
-      </p>
-      <p>
-        The term <dfn>target resource</dfn> is defined in HTTP/1.1 syntax [[RFC7230]]
-        and semantics [[RFC7231]].
-      </p>
-      <p>
         A <dfn>do-not-sell-or-share interaction</dfn> is an interaction with a website in which the
         user is requesting that their data not be sold to or shared with any party other than the one
         the user intends to interact with, except as permitted by law.
@@ -221,9 +211,8 @@
         <h2>JavaScript Property to Detect Preference</h2>
         <p>
           The <code><dfn>Navigator.globalPrivacyControl</dfn></code> property enables a client-side
-          script to determine what <a><code>Sec-GPC</code></a> header field value would be sent to
-          the <a>effective script origin</a> when referenced by the active document's <a>top-level
-          browsing context</a>.
+          script to determine what <a><code>Sec-GPC</code></a> header field value was sent when
+          loading the [=top-level browsing context=]'s [=active document=].
         </p>
         <pre class="idl">
           interface mixin GlobalPrivacyControl {
