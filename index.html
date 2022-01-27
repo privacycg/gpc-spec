@@ -89,7 +89,7 @@
     <section id="abstract">
       <p>
         This document defines a signal, transmitted over HTTP and through the DOM, that conveys a
-        user's request to websites and services to not sell or share their personal information with
+        person's request to websites and services to not sell or share their personal information with
         third parties. This standard is intended to work with existing and upcoming legal frameworks
         that render such requests enforceable.
       </p>
@@ -99,15 +99,15 @@
       <h2>Introduction</h2>
       <p>
         Building websites today often requires relying on services provided by businesses other than
-        the one which the user choses to interact with. This result is a natural consequence of the
+        the one which the person choses to interact with. This result is a natural consequence of the
         increasing complexity of Web technology and of the division of labor between different
         services. While this architecture can be used in the service of better Web experiences,
-        it can also be abused to violate user privacy.
+        it can also be abused to violate privacy.
       </p>
       <p>
-        Several legal frameworks exist — and more are on the way — within which users have the right
+        Several legal frameworks exist — and more are on the way — within which people have the right
         to request that their privacy be protected, including requests that their data not be sold
-        or shared beyond the business with which they intend to interact. Requiring that users
+        or shared beyond the business with which they intend to interact. Requiring that people
         express their rights for each and every site they visit is, however, impractical.
       </p>
       <blockquote cite="https://oag.ca.gov/sites/all/files/agweb/pdfs/privacy/ccpa-fsor.pdf">
@@ -122,7 +122,7 @@
       </blockquote>
       <p>
         This specification addresses the issue by providing a way to signal, through an HTTP header
-        or the DOM, a user's assertion of their applicable rights to prevent selling their data to
+        or the DOM, a person's assertion of their applicable rights to prevent selling their data to
         third parties or sharing data with them. This signal is equivalent, for example, to the
         "global privacy control" in the CCPA [[CCPA-REGULATIONS]].
       </p>
@@ -131,8 +131,8 @@
       <h2>Definitions</h2>
       <p>
         A <dfn>do-not-sell-or-share interaction</dfn> is an interaction with a website in which the
-        user is requesting that their data not be sold to or shared with any party other than the
-        one the user intends to interact with, except as permitted by law.
+        person is requesting that their data not be sold to or shared with any party other than the
+        one the person intends to interact with, except as permitted by law.
       </p>
       <p>
         A <dfn data-lt="preference">do-not-sell-or-share preference</dfn> is when a person requests
@@ -158,22 +158,22 @@
         <p>
           In the absence of regulatory, legal, or other requirements, Web sites MAY interpret an
           expressed Global Privacy Control [=preference=] as they find most appropriate for the given
-          user, particularly as considered in light of the user's privacy expectations, context, and
+          person, particularly as considered in light of the person's privacy expectations, context, and
           cultural circumstances. Likewise, Web sites might make use of other [=preference=] information
-          outside the scope of this protocol, such as site-specific user [=preferences=] or third-party
+          outside the scope of this protocol, such as site-specific person [=preferences=] or third-party
           registration services, to inform or adjust their behavior when no explicit [=preference=] is
           expressed via this protocol.
         </p>
         <p>
-          User agents are expected to convey user [=preferences=] as accurately as they can. User
-          agents SHOULD strive to represent what the user agent best believes to be the user's
+          User agents are expected to convey person [=preferences=] as accurately as they can. User
+          agents SHOULD strive to represent what the user agent best believes to be the person's
           [=preference=] for the Global Privacy Control value.
         </p>
       </section>
       <section>
         <h3>The <code>Sec-GPC</code> Header Field for HTTP Requests</h3>
         <p>
-          The <dfn><code>Sec-GPC</code></dfn> header field is a mechanism for expressing the user's
+          The <dfn><code>Sec-GPC</code></dfn> header field is a mechanism for expressing the person's
           [=preference=] for a [=do-not-sell-or-share interaction=] in an HTTP request. At most one
           <code>Sec-GPC</code> header field can be present in a valid request.
         </p>
@@ -182,13 +182,13 @@
           Sec-GPC-field-value = "1"
         </pre>
         <p>
-          A user agent MUST NOT generate a <code>Sec-GPC</code> header field if the user's Global
-          Privacy Control [=preference=] is not enabled.
+          A user agent MUST NOT generate a <code>Sec-GPC</code> header field if the person's Global
+          Privacy Control [=preference=] is not enabled or defaulted to.
         </p>
         <p>
           A user agent MUST generate a <code>Sec-GPC</code> header field with a field-value that
-          is exactly the numeric character "1" if the user's Global Privacy Control [=preference=] is
-          set.
+          is exactly the numeric character "1" if the person's Global Privacy Control [=preference=]
+          is set.
         </p>
         <aside class="example" title="Example GPC Request">
           <pre class="hljs http">
@@ -232,13 +232,12 @@
         </p>
         <p>
           Specifically, the value of {{GlobalPrivacyControl/globalPrivacyControl}} for a given script is
-          <code>true</code> if a user has requested that their data "not be sold or shared" via
+          <code>true</code> if a person has requested that their data "not be sold or shared" via
           setting a Global Privacy Control [=preference=].
         </p>
         <p>
-          Ideally, the value of {{GlobalPrivacyControl/globalPrivacyControl}} ought to reflect the
-          [=preference=] of the user when the attribute is read. In practice, however, the value
-          might only reflect the value that was in effect when the script was initiated.
+          The value of {{GlobalPrivacyControl/globalPrivacyControl}} MUST reflect the [=preference=]
+          of the person when the [=top-level browsing context=]'s [=active document=] began loading.
         </p>
         <p>
           The {{GlobalPrivacyControl/globalPrivacyControl}} property is available on the
@@ -353,12 +352,12 @@
           <p>
             The GDPR requires that "Natural persons should have control of their own personal data"
             ([[GDPR]], Recital 7). The GPC signal is intended to convey a general request that data
-            controllers limit the sale or sharing of the user's personal data to other data
+            controllers limit the sale or sharing of the person's personal data to other data
             controllers ([[GDPR]] Articles 7 &amp; 21). This request is expressed with every
             interaction that the user agent has with the server.
           </p>
           <p>
-            Note that this request is not meant to withdraw a user's consent to local storage as per
+            Note that this request is not meant to withdraw a person's consent to local storage as per
             the ePrivacy Directive ("cookie consent") ([[EPRIVACY-DIRECTIVE]]) nor is it intended to
             object to direct marketing under legitimate interest ([[GDPR]]).
           </p>
@@ -367,7 +366,7 @@
       <p>
         Given the complexities of existing consent frameworks, publishers who accept the GPC signal
         should disclose how they treat the GPC signal in that jurisdiction and how they deal with
-        conflicts between the signal and other specific privacy choices that the user has already
+        conflicts between the signal and other specific privacy choices that the person has already
         made directly with the publisher, including instances where third party sharing may be
         permitted such as sharing to service providers/processors, sharing at law or at the
         direction of the individual.
@@ -375,12 +374,12 @@
       <section>
         <h2>User Interface Language</h2>
         <p>
-          Studies have shown that users do not want their data sold or shared. However, in some
+          Studies have shown that people do not want their data sold or shared. However, in some
           jurisdictions they can only avail themselves of that [=preference=] by explicitly asserting
           control.
         </p>
         <p>
-          User agents are expected, where required, to present all the appropriate notices to users
+          User agents are expected, where required, to present all the appropriate notices to people
           to ensure that the rights they wish to avail themselves of are effectively binding.
         </p>
       </section>
@@ -399,10 +398,10 @@
       <p>
         Regulations that intend to support GPC are encouraged to consider such implementation
         difficulties. One way of addressing them is to differentiate between user interface
-        affordances given to users for the purpose of requesting a [=do-not-sell-or-share
+        affordances given to people for the purpose of requesting a [=do-not-sell-or-share
         interaction=] [=preference=] to persist on the site, and the provision of a
         [=do-not-sell-or-share interaction=] signal the state of which is maintained with the
-        user agent. In the latter case, the interaction can be processed as if the user had
+        user agent. In the latter case, the interaction can be processed as if the person had
         previously requested such a [=do-not-sell-or-share interaction=] [=preference=] and were
         interacting with that [=preference=] already active.
       </p>
