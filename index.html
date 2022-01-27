@@ -286,7 +286,8 @@
             </li>
             <li>
               A <code>lastUpdate</code> member. The value of the <code>lastUpdate</code>
-              member MUST be an RFC3339 date or date and time [[RFC3339]]. This indicates the time at
+              member MUST be an RFC3339 <code>full-date</code> (YYYY-MM-DD) or <code>date-time</code>
+              (YYYY-MM-DDTHH:MM:SS(?:0+)?TZ) [[RFC3339]]. This indicates the time at
               which the statement of support was made, such that later changes to the meaning of the
               GPC standard should not affect the interpretation of the resource for legal purposes.
               If the member is not in a valid RFC3339 format, the last update date and time is
