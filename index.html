@@ -263,6 +263,13 @@
           <code>navigator</code> object in both regular and worker contexts, and so can be checked
           reading from <code>navigator.globalPrivacyControl</code>.
         </p>
+        <aside class="example" title="checking GPC in script">
+          <pre class="js">
+            if (!navigator.globalPrivacyControl) {
+              // wonderful, we can sell this person's data!
+            }
+          </pre>
+        </aside>
       </section>
     </section>
     <section>
