@@ -18,10 +18,13 @@
           let time = doc.querySelector('#w3c-state time')
            , h2 = doc.querySelector('#w3c-state')
            , abs = doc.querySelector('#sotd > p')
+           , dl = doc.querySelector('div.head > details > dl')
           ;
           h2.innerHTML = 'Proposal ';
           h2.appendChild(time);
           abs.textContent = 'This document is a specification proposal.';
+          dl.removeChild(dl.firstElementChild);
+          dl.removeChild(dl.firstElementChild);
         }],
         xref: ['html'],
         editors: [
