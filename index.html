@@ -112,7 +112,9 @@
         the one which a person choses to interact with. This result is a natural consequence of the
         increasing complexity of Web technology and of the division of labor between different
         services. While this architecture can be used in the service of better Web experiences,
-        it can also be abused to violate privacy ([[?Privacy-Principles]]).
+        it can also be abused to violate privacy ([[?Privacy-Principles]]). While data can be shared
+        with service providers for limited operational purposes, it can also be shared with third
+        parties or used for behavioral targeting in ways that many users find objectionable.
       </p>
       <p>
         Several legal frameworks exist — and more are on the way — within which people have the right
@@ -132,9 +134,10 @@
       </blockquote>
       <p>
         This specification addresses the issue by providing a way to signal, through an HTTP header
-        or the DOM, a person's assertion of their applicable rights to prevent selling data about them to
-        third parties or sharing data with them. This signal is equivalent, for example, to the
-        "global privacy control" in the CCPA [[?CCPA-REGULATIONS]].
+        or the DOM, a person's assertion of their applicable rights to prevent the sale of their data,
+        the sharing of their data with third parties, and the use of their data for cross-site targeted
+        advertising. This signal is equivalent, for example, to the "global privacy control" in the
+        CCPA [[?CCPA-REGULATIONS]].
       </p>
     </section>
     <section>
@@ -142,7 +145,8 @@
       <p>
         A <dfn>do-not-sell-or-share interaction</dfn> is an interaction with a website in which the
         person is requesting that their data not be sold to or shared with any party other than the
-        one the person intends to interact with, except as permitted by law.
+        one the person intends to interact with, or to have their data used for cross-site ad targeting,
+        except as permitted by law.
       </p>
       <p>
         A <dfn data-lt="preference">do-not-sell-or-share preference</dfn> is when a person requests
