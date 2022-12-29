@@ -265,7 +265,7 @@
         <p>
           The {{GlobalPrivacyControl/globalPrivacyControl}} property enables a client-side
           script to determine what <code>[=Sec-GPC=]</code> header field value was sent when
-          loading the [=top-level browsing context=]'s [=active document=].
+          loading the [=top-level browsing context=]'s [=navigable/active document=].
         </p>
         <pre class="idl">
           interface mixin GlobalPrivacyControl {
@@ -285,7 +285,7 @@
         </p>
         <p>
           The value of {{GlobalPrivacyControl/globalPrivacyControl}} MUST reflect the [=preference=]
-          of the person when the [=top-level browsing context=]'s [=active document=] began loading.
+          of the person when the [=top-level browsing context=]'s [=navigable/active document=] began loading.
         </p>
         <p>
           The {{GlobalPrivacyControl/globalPrivacyControl}} property is available on the
