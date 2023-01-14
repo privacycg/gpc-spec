@@ -1,11 +1,11 @@
 [![][gpc-logo]][gpc-url]
-[![License](https://img.shields.io/badge/license-CC%20BY%204.0-0c7453)](https://github.com/globalprivacycontrol/gpc-spec/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-CC%20BY%204.0-0c7453)](https://github.com/privacycg/gpc-spec/blob/master/LICENSE)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-0c7453.svg)](CODE_OF_CONDUCT.md)
 [![Twitter](https://img.shields.io/twitter/follow/globalprivctrl.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=globalprivctrl)
 
 # Global Privacy Control (GPC) Draft Specification
 
-This draft specification can be [viewed via GitHub Pages](https://globalprivacycontrol.github.io/gpc-spec/).
+This draft specification can be [viewed via GitHub Pages](https://privacycg.github.io/gpc-spec/).
 
 This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior to info@globalprivacycontrol.org.
@@ -15,7 +15,7 @@ Please email info@globalprivacycontrol.org if you would like more information or
 
 ## License
 Apart from any logos or marks that may be contained in this repo, this work is licensed under a
-[Creative Commons Attribution 4.0 International License](https://github.com/globalprivacycontrol/gpc-spec/blob/master/LICENSE).
+[Creative Commons Attribution 4.0 International License](https://github.com/privacycg/gpc-spec/blob/master/LICENSE).
 
 [![CC BY 4.0][cc-by-image]][cc-by]
 
