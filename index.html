@@ -29,30 +29,10 @@
         xref: ['html'],
         editors: [
           {
-            name: 'Robin Berjon',
-            company: 'Protocol Labs',
-            companyURL: 'https://protocol.ai/',
-            url: 'https://berjon.com/',
-            note: 'The New York Times until Sep 2022',
-            w3cid: 34327,
-          },
-          {
             name: 'Sebastian Zimmeck',
             company: 'Wesleyan University',
             companyURL: 'https://www.wesleyan.edu/',
             url: 'https://www.privacytechlab.org/',
-          },
-          {
-            name: 'Ashkan Soltani',
-            company: 'Independent',
-            companyURL: 'https://ashkansoltani.org',
-            url: 'https://ashkansoltani.org',
-          },
-          {
-            name: 'David Harbage',
-            company: 'DuckDuckGo',
-            companyURL: 'https://duckduckgo.com/',
-            url: 'https://davidharbage.com/',
           },
           {
             name: 'Peter Snyder',
@@ -72,9 +52,31 @@
             url: 'https://aramzs.github.io/aramzs/',
           },
         ],
+        formerEditors: [
+          {
+            name: 'Robin Berjon',
+            company: 'Protocol Labs',
+            companyURL: 'https://protocol.ai/',
+            url: 'https://berjon.com/',
+            note: 'The New York Times until Sep 2022',
+            w3cid: 34327,
+          },
+          {
+            name: 'Ashkan Soltani',
+            company: 'Independent',
+            companyURL: 'https://ashkansoltani.org',
+            url: 'https://ashkansoltani.org',
+          },
+          {
+            name: 'David Harbage',
+            company: 'DuckDuckGo',
+            companyURL: 'https://duckduckgo.com/',
+            url: 'https://davidharbage.com/',
+          },
+        ],
         shortName: 'gpc',
-        github: 'https://github.com/globalprivacycontrol/gpc-spec',
-        edDraftURI: 'https://globalprivacycontrol.github.io/gpc-spec/',
+        github: 'https://github.com/privacycg/gpc-spec',
+        edDraftURI: 'https://privacycg.github.io/gpc-spec/',
         xref: ['html'],
         localBiblio: {
           'CCPA-AG-FINAL-STATEMENT': {
@@ -322,7 +324,7 @@
       </p>
       <p>
         A GPC Support Resource has the well-known identifier <code>/.well-known/gpc.json</code>
-        relative to the origin server's URL [[RFC5785]].
+        relative to the origin server's URL [[RFC8615]].
       </p>
       <p>
         An origin server that receives a valid GET request targeting its GPC support resource
