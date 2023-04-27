@@ -206,12 +206,12 @@
           during or after a top-level navigation, it WILL NOT be reflected until the next navigation.
         </p>
         <p>
-          A [=top-level browsing context=] has a <dfn><code>cachedGPCAtTimeOfLastNavigation</code></dfn> boolean.
+          A [=top-level browsing context=] has a <dfn><code>gpcAtNavigation</code></dfn> boolean.
           It is initially <code>false</code>.
         </p>
         <p>
           When [=process a navigate fetch=] is run with [=top-level browsing context=] as <code>browsingContext</code>,
-          [=top-level browsing context=]'s <dfn><code>cachedGPCAtTimeOfLastNavigation</code></dfn> is updated to
+          [=top-level browsing context=]'s <dfn><code>gpcAtNavigation</code></dfn> is updated to
           <code>true</code> if the [=preference=] is enabled, and <code>false</code> if the the [=preference=] is disabled
           or defaulted to.
         </p>
@@ -232,12 +232,12 @@
         </pre>
         <p>
           A user agent MUST NOT generate a <code>[=Sec-GPC=]</code> header field if [=top-level browsing context=]'s
-          <code>cachedGPCAtTimeOfLastNavigation</code> is <code>false</code>.
+          <code>gpcAtNavigation</code> is <code>false</code>.
         </p>
         <p>
           A user agent MUST generate a <code>[=Sec-GPC=]</code> header field with a field-value that
           is exactly the numeric character "1" if [=top-level browsing context=]'s
-          <code>cachedGPCAtTimeOfLastNavigation</code> is <code>true</code>.
+          <code>gpcAtNavigation</code> is <code>true</code>.
         </p>
         <p>
           A user agent MUST NOT generate more than one <code>[=Sec-GPC=]</code> in a given HTTP
@@ -300,7 +300,7 @@
         </p>
         <p>
           The value of {{GlobalPrivacyControl/globalPrivacyControl}} MUST be the
-          [=top-level browsing context=]'s <code>cachedGPCAtTimeOfLastNavigation</code>.
+          [=top-level browsing context=]'s <code>gpcAtNavigation</code>.
         </p>
         <p>
           The {{GlobalPrivacyControl/globalPrivacyControl}} property is available on the
