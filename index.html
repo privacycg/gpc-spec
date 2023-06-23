@@ -217,9 +217,9 @@
         </p>
         <p>
           If [=preference=] is changed to be inconsistent with some <code>gpcAtNavigation</code> cached in a
-          [=top-level browsing context=], the user agent SHOULD prompt for any inconsistent tabs to be reloaded
-          (refreshing the cached <code>gpcAtNavigation</code> to reflect the current [=preference=]). The user agent
-          MAY prompt for a refresh of all inconsistent tabs at once or for each individually as the user interacts with them.
+          [=top-level browsing context=], the user agent SHOULD inform the user of any inconsistent tabs and provide
+          the option to reload them, refreshing the cached <code>gpcAtNavigation</code> to reflect the current [=preference=]
+          The user agent MAY prompt for a refresh of all inconsistent tabs at once or for each individually as the user interacts with them.
         </p>
       </section>
       <section>
