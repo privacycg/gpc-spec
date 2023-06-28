@@ -210,10 +210,11 @@
           It is initially <code>false</code>.
         </p>
         <p>
-          When [=process a navigate fetch=] is run with [=top-level browsing context=] as <code>browsingContext</code>,
+          The value of<dfn><code>gpcAtNavigation</code></dfn> MUST reflect the [=preference=]
+          of the person when the [=top-level browsing context=]'s [=navigable/active document=] began loading.
           [=top-level browsing context=]'s <dfn><code>gpcAtNavigation</code></dfn> is updated to
-          <code>true</code> if the person's  [=preference=] is enabled, and <code>false</code> if
-          the person's [=preference=] is disabled or has not been set.
+          It will be <code>true</code> if the person's  [=preference=] was enabled, and <code>false</code> if
+          the person's [=preference=] was disabled or had not been set.
         </p>
         <p>
           If [=preference=] is changed to be inconsistent with some <code>gpcAtNavigation</code> cached in a
