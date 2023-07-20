@@ -199,6 +199,29 @@
         </p>
       </section>
       <section>
+        <h3>Preference Caching</h3>
+        <p>
+          The [=preference=] MUST be cached on each top-level navigation to ensure consistency in communication of
+          the person's request that their data "not be sold or shared." This means that if the [=preference=] changes
+          during or after a top-level navigation, it will not be reflected until the next navigation.
+        </p>
+        <p>
+          A [=top-level browsing context=] has a <dfn><code>gpcAtNavigation</code></dfn> boolean.
+          It is initially <code>false</code>.
+        </p>
+        <p>
+          The value of<dfn><code>gpcAtNavigation</code></dfn> MUST reflect the [=preference=]
+          of the person when the [=top-level browsing context=]'s [=navigable/active document=] began loading.
+          It will be <code>true</code> if the person's  [=preference=] was enabled, and <code>false</code> if
+          the person's [=preference=] was disabled or had not been set.
+        </p>
+        <p>
+          If [=preference=] is changed to be inconsistent with some <code>gpcAtNavigation</code> cached in a
+          [=top-level browsing context=], the user agent SHOULD inform the user of any inconsistent tabs and provide
+          the option to reload them, refreshing the cached <code>gpcAtNavigation</code> to reflect the current [=preference=].
+        </p>
+      </section>
+      <section>
         <h3>The <code>Sec-GPC</code> Header Field for HTTP Requests</h3>
         <p>
           The <dfn><code>Sec-GPC</code></dfn> header field is a mechanism for expressing the person's
@@ -213,13 +236,13 @@
           Sec-GPC-field-value = "1"
         </pre>
         <p>
-          A user agent MUST NOT generate a <code>[=Sec-GPC=]</code> header field if the person's Global
-          Privacy Control [=preference=] is not enabled or defaulted to.
+          A user agent MUST NOT generate a <code>[=Sec-GPC=]</code> header field if [=top-level browsing context=]'s
+          <code>gpcAtNavigation</code> is <code>false</code>.
         </p>
         <p>
           A user agent MUST generate a <code>[=Sec-GPC=]</code> header field with a field-value that
-          is exactly the numeric character "1" if the person's Global Privacy Control [=preference=]
-          is set.
+          is exactly the numeric character "1" if [=top-level browsing context=]'s
+          <code>gpcAtNavigation</code> is <code>true</code>.
         </p>
         <p>
           A user agent MUST NOT generate more than one <code>[=Sec-GPC=]</code> in a given HTTP
@@ -281,13 +304,8 @@
           otherwise, the value is <code>true</code>.
         </p>
         <p>
-          Specifically, the value of {{GlobalPrivacyControl/globalPrivacyControl}} for a given script is
-          <code>true</code> if a person has requested that their data "not be sold or shared" via
-          setting a Global Privacy Control [=preference=].
-        </p>
-        <p>
-          The value of {{GlobalPrivacyControl/globalPrivacyControl}} MUST reflect the [=preference=]
-          of the person when the [=top-level browsing context=]'s [=navigable/active document=] began loading.
+          The value of {{GlobalPrivacyControl/globalPrivacyControl}} MUST be the
+          [=top-level browsing context=]'s <code>gpcAtNavigation</code>.
         </p>
         <p>
           The {{GlobalPrivacyControl/globalPrivacyControl}} property is available on the
