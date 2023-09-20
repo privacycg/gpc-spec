@@ -105,6 +105,10 @@
             title: 'Nevada SB220 (NRS 603A)',
             href: 'https://www.leg.state.nv.us/NRS/NRS-603A.html',
           },
+          'COLORADO-REGULATIONS': {
+            title: 'Colorado Regulations',
+            href: 'https://coag.gov/app/uploads/2023/03/FINAL-CLEAN-2023.03.15-Official-CPA-Rules.pdf'
+          },
         },
       };
     </script>
@@ -483,9 +487,45 @@
       <section>
         <h2>User Interface Language</h2>
         <p>
-          Studies have shown that people do not want their data sold or shared. However, in some
-          jurisdictions they can only avail themselves of that [=preference=] by explicitly asserting
-          control.
+          User agents SHOULD strive to represent what the user agent best believes to be the person's
+          preference for the Global Privacy Control value. While studies have shown that people do not
+          want their data sold or shared, some jurisdictions have enacted "opt-out" legal frameworks
+          where consumers have to take an affirmative action to express a [=preference=] to limit data
+          sharing of the use of their data for targeted advertising.
+        </p>
+        <p>
+          Different jurisdictions have different prerequisites before a platform can enable a universal
+          opt-out. For example, regulations promulgated under the California Consumer Privacy Act state:
+        </p>
+        <blockquote cite=https://cppa.ca.gov/regulations/pdf/cppa_regs.pdf>
+          The platform, technology, or mechanism that sends the opt-out preference signal shall make
+          clear to the consumer, whether in its configuration or in disclosures to the public, that
+          the use of the signal is meant to have the effect of opting the consumer out of the sale
+          and sharing of their personal information. The configuration or disclosure does not need to
+          be tailored only to California or to refer to California.
+        </blockquote>
+        <p>
+          Colorado and other jurisdictions are more prescriptive about requirements for a valid universal
+          opt-out signal. For example, Colorado’s regulations explicitly provide “a Universal Opt-Out
+          Mechanism may not be the default setting for a tool that comes pre-installed with a device,
+          such as a browser or operating system” ([[?COLORADO-REGULATIONS]], Rule 5.04(a)).
+        </p>
+        <p>
+          Currently California and Colorado are the only jurisdictions in the United States that empower
+          regulators to issue detailed regulations on topics such as universal opt-outs. Other statutes
+          have state relatively high level legal requirements that may be augmented by informal guidance
+          (such as an FAQ) or through enforcement.
+        </p>
+        <p>
+          The legal landscape around global opt-outs is also changing. In 2023, several new states passed
+          laws that include requirements to honor global opt-outs, though some of those states’ provisions
+          differ considerably. Additionally states may revise their legal requirements as California has
+          already amended the original CCPA that was passed in 2018.
+        </p>
+        <p>
+          For more information on the latest legal requirements, please review the implementation guide
+          which will provide more up-to-date information about the latest legal guidance around global
+          opt-outs.
         </p>
         <p>
           User agents are expected, where required, to present all the appropriate notices to people
