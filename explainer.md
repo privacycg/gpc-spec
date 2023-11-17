@@ -150,7 +150,16 @@ Given the complexities of existing privacy choice and consent frameworks, sites 
 
 Where industry standards set specific strings or signals that are needed to communicate people’s privacy choices, sites should anticipate translating GPC into the downstream signal. A good example of such setting is handling GPC to set California-based US Privacy Strings for advertising technology:
 
-![USPAPI](assets/images/USPAPI.png)  
+```javascript
+if (
+    navigator.globalPrivacyControl &&
+    identityObject.geoState === 'CA'
+) {
+    this.uspapi.uspStringSet = true;
+    this.uspapi.setUSPString(`1YYY`);
+} else if
+```
+
 Setting the USPAPI for propagating GPC downstream.
 
 Generally website developers should consider GPC signals to be identical to a user flipping the opt out switch on their website and take action accordingly.
