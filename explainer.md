@@ -1,8 +1,9 @@
 # Global Privacy Control (GPC) Explainer
 
-By Aram Zucker-Scharff
-
-Edited by Justin Brookman and Sebastian Zimmeck
+Editors: 
+[Aram Zucker-Scharff]
+Justin Brookman
+Sebastian Zimmeck
 
 ## 0. tl;dr
 
@@ -41,13 +42,13 @@ The GPC signal is either on or not present. If it is on, then an individual is e
 
 Requests from a device or browser that supports GPC and where people have activated the GPC signal must contain **both** the header and an addition to the navigator object readable by JavaScript.
 
-### Header
+### 3.1 Header
 
 The following header **must** be on every request:
 
 `Sec-GPC: 1`
 
-### Navigator Object
+### 3.2 Navigator Object
 
 The property that is added to the navigator object is
 
@@ -55,13 +56,13 @@ The property that is added to the navigator object is
 
 Its value will always be `true` or the property will not be set. **The signal is expected to be active at the time the page loads.**
 
-### Signal Behavior
+### 3.3 Signal Behavior
 
 The signal is always either **present and true** or **not present**. This design is rooted in providing full clarity of the signal.
 
 The specification presents this design to assure that there can be no mistake in understanding the intent or state of the signal. If the signal is active, it is expected that it is expressing an individual’s privacy choice.
 
-### GPC Support Resource
+### 3.4 GPC Support Resource
 
 The GPC Support Resource should be at `https://{yourwebsite.com}/.well-known/gpc.json`. The GPC Support Resource should only be hosted by domains that are concerned with listening to the signal. If you develop technology to emit the signal, it is not intended that the GPC Support Resource is stating something about your technology.
 
@@ -79,7 +80,7 @@ The specification is designed to express a generic preference to have their data
 
 There are situations where the design of GPC, by intent, matches specific legal or regulatory mechanisms. The intent is to connect GPC to specific laws and legally-understood requests by users to allow users to exercise privacy rights at scale.
 
-### GPC in the US
+### 4.1 GPC in the US
 
 The [CCPA Regulations](https://oag.ca.gov/privacy/ccpa/regs) provide specific language supporting consumer’s use of a global privacy control. GPC was created with the intent to supply users with the ability to exercise CCPA and related opt out requests. GPC compliance is [enforced by the Office of the California Attorney General](https://oag.ca.gov/news/press-releases/attorney-general-bonta-announces-settlement-sephora-part-ongoing-enforcement) and the California Privacy Protection Agency.
 
@@ -87,7 +88,7 @@ The Colorado and Connecticut privacy laws also have specific global opt out mech
 
 Virginia and Utah have privacy laws that grant people the right to opt out but do not have information about specific mechanisms. While the law does not explicitly require respecting GPC in those states, GPC intends to provide a signal to opt out using those rights and regulators are free to adopt it.
 
-### GPC outside the US
+### 4.2 GPC outside the US
 
 The European Union and European Economic Area have the General Data Protection Regulation (GDPR). This law provides for a number of bases for data processing, including consent and the "legitimate interest" of the data controller. For processing pursuant to a company’s "legitimate interest," Article 21 of the GDPR offers people an ability to object, or opt out, of such processing. As GPC is intended to convey a general request that data controllers limit the sale or sharing of the person's personal data to other data controllers, European regulators may deem GPC to constitute a legally binding invocation of Article 21 rights. To date, no European regulator has explicitly made this case, though some commentators have argued that [GPC has legal effect under the GDPR](https://berjon.com/gpc-under-the-gdpr/).
 
@@ -103,7 +104,7 @@ It is not considered standard for W3C specifications to present user interface r
 
 This explainer presents examples of user-agent user interfaces for GPC as an aid to adopters who are interested in or required to implement GPC as to how it can be presented.
 
-### Example Presentations of User-agent Level UI
+### 6.1 Example Presentations of User-agent Level UI
 
 The following examples come from the [OptMeowt browser extension](https://github.com/privacy-tech-lab/gpc-optmeowt), which is developed at the [privacy-tech-lab](https://privacytechlab.org/) at Wesleyan University, and reflects best practices for GPC. We also show how Mozilla surfaces the GPC setting in Firefox. These examples are shown to illustrate. They are not meant as a comprehensive set of UIs for GPC.
 
@@ -132,7 +133,7 @@ A user interface can show what response is at `https://{yourwebsite.com}/.well-k
 ![OptMeowt GPC Response](assets/images/OptMeowt_GPC_Response.png)  
 An example of how GPC responses can be surfaced (OptMeowt).
 
-### User-agents
+### 6.2 User-agents
 
 The above examples are from an extension in a web browser. User-agents should implement similar interface conventions. The authors of this document recommend that user-gents have some way to display to people the state of their GPC signal when it is on during the course of regular interaction with the site instead of putting it behind a settings page.
 
@@ -144,7 +145,7 @@ If the user-agent makes the GPC setting visible when active, it should retain in
 
 User-agents should not challenge people with a request to set GPC in either mode beyond initial setup. Per-domain settings of GPC should be up to an individual to engage with, not pushed via a notification, modal, pop-up, or similar interactive element.
 
-### Adopting on Your Websites
+### 6.3 Adopting on Your Website
 
 Given the complexities of existing privacy choice and consent frameworks, sites that implement GPC should disclose how they treat it in any jurisdiction for which they adopt it and how they deal with conflicts between a GPC signal and other specific privacy choices that an individual has already made directly with the site, including instances where third party sharing may be permitted, such as sharing to service providers/processors or at the direction of the individual.
 
