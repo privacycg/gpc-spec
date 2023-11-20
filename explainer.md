@@ -1,21 +1,29 @@
 # Global Privacy Control (GPC) Explainer
 
 Editors: 
-[Aram Zucker-Scharff]
-Justin Brookman
-Sebastian Zimmeck
+[Aram Zucker-Scharff](https://github.com/AramZS)
+[Justin Brookman](https://github.com/j-br0)
+[Sebastian Zimmeck](https://github.com/SebastianZimmeck)
 
 ## 0. tl;dr
 
 Global Privacy Control (GPC) is a proposed specification designed to allow Internet users to notify businesses of their preference to not have their personal information sold or shared, or used for targeted advertising. It consists of a setting or extension in the user’s browser that provides a mechanism that websites can use to indicate they support the specification.
 
-[1. Draft Specification](#1-draft-specification)  
-[2. Background](#2-background)  
-[3. Solution](#3-solution)  
-[4. Legal Effects](#4-legal-effects)  
-[5. Additional Interpretation Options and Explanations](#5-additional-interpretation-options-and-explanations)  
-[6. User Experience Considerations and Recommendations](#6-user-experience-considerations-and-recommendations)  
-[7. Alternatives Considered](#7-alternatives-considered)
+- [1. Draft Specification](#1-draft-specification)  
+- [2. Background](#2-background)  
+- [3. Solution](#3-solution)
+    - [3.1 Header](#31-header)
+    - [3.2 Navigator Object](#32-navigator-object)
+    - [3.3 Signal Behavior](#33-signal-behavior)  
+- [4. Legal Effects](#4-legal-effects)
+    - [4.1 GPC in the US](#41-gpc-in-the-us)
+    - [4.2 GPC outside the US](#42-gpc-outside-the-us)
+- [5. Additional Interpretation Options and Explanations](#5-additional-interpretation-options-and-explanations)  
+- [6. User Experience Considerations and Recommendations](#6-user-experience-considerations-and-recommendations)
+    - [6.1 Example Presentations of User-agent Level UI](#61-example-presentations-of-user-agent-level-ui)
+    - [6.2 User-agents](#62-user-agents)
+    - [6.3 Adopting on Your Website](#63-adopting-on-your-website)
+- [7. Alternatives Considered](#7-alternatives-considered)
 
 ## 1. Draft Specification
 
