@@ -1,6 +1,6 @@
 # Global Privacy Control (GPC) Explainer
 
-Editors: 
+Editors:
 [Aram Zucker-Scharff](https://github.com/AramZS)
 [Justin Brookman](https://github.com/j-br0)
 [Sebastian Zimmeck](https://github.com/SebastianZimmeck)
@@ -9,20 +9,20 @@ Editors:
 
 Global Privacy Control (GPC) is a proposed specification designed to allow Internet users to notify businesses of their preference to not have their personal information sold or shared, or used for targeted advertising. It consists of a setting or extension in the user’s browser that provides a mechanism that websites can use to indicate they support the specification.
 
-- [1. Draft Specification](#1-draft-specification)  
-- [2. Background](#2-background)  
+- [1. Draft Specification](#1-draft-specification)
+- [2. Background](#2-background)
 - [3. Solution](#3-solution)
-    - [3.1 Header](#31-header)
-    - [3.2 Navigator Object](#32-navigator-object)
-    - [3.3 Signal Behavior](#33-signal-behavior)  
+  - [3.1 Header](#31-header)
+  - [3.2 Navigator Object](#32-navigator-object)
+  - [3.3 Signal Behavior](#33-signal-behavior)
 - [4. Legal Effects](#4-legal-effects)
-    - [4.1 GPC in the US](#41-gpc-in-the-us)
-    - [4.2 GPC outside the US](#42-gpc-outside-the-us)
-- [5. Additional Interpretation Options and Explanations](#5-additional-interpretation-options-and-explanations)  
+  - [4.1 GPC in the US](#41-gpc-in-the-us)
+  - [4.2 GPC outside the US](#42-gpc-outside-the-us)
+- [5. Additional Interpretation Options and Explanations](#5-additional-interpretation-options-and-explanations)
 - [6. User Experience Considerations and Recommendations](#6-user-experience-considerations-and-recommendations)
-    - [6.1 Example Presentations of User-agent Level UI](#61-example-presentations-of-user-agent-level-ui)
-    - [6.2 User-agents](#62-user-agents)
-    - [6.3 Adopting on Your Website](#63-adopting-on-your-website)
+  - [6.1 Example Presentations of User-agent Level UI](#61-example-presentations-of-user-agent-level-ui)
+  - [6.2 User-agents](#62-user-agents)
+  - [6.3 Adopting on Your Website](#63-adopting-on-your-website)
 - [7. Alternatives Considered](#7-alternatives-considered)
 
 ## 1. Draft Specification
@@ -114,7 +114,7 @@ This explainer presents examples of user-agent user interfaces for GPC as an aid
 
 ### 6.1 Example Presentations of User-agent Level UI
 
-The following examples come from the [OptMeowt browser extension](https://github.com/privacy-tech-lab/gpc-optmeowt), which is developed at the [privacy-tech-lab](https://privacytechlab.org/) at Wesleyan University, and reflects best practices for GPC. We also show how Mozilla surfaces the GPC setting in Firefox. These examples are shown to illustrate. They are not meant as a comprehensive set of UIs for GPC.
+The following examples come from the [OptMeowt browser extension](https://github.com/privacy-tech-lab/gpc-optmeowt), which is developed at the [privacy-tech-lab](https://privacytechlab.org/) at Wesleyan University. We also show how Mozilla surfaces the GPC setting in Firefox. These examples are shown to illustrate. They are not meant as a comprehensive set of UIs for GPC.
 
 Whichever user interface applications are implemented, they are expected to meet accessibility standards.
 
