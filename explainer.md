@@ -48,7 +48,7 @@ The specification also provides an option for sites to provide a GPC Support Res
 
 The GPC signal is either on or not present. If it is on, then an individual is expressing a privacy choice, for example, to opt out of the sale and data sharing per the California Consumer Privacy Act (CCPA). Sites may choose to support this request beyond what they are legally required to do and their vendors may choose to do so as well.
 
-If someone activates GPC, a device or browser that supports the feature will send an HTTP header and set a property that can be read by JavaScript.  Sites can read either signal.
+If someone expresses a preference for their information to not be sold or shared, a device or browser that supports the feature will enable GPC signals.  GPC is signaled with an HTTP header and a property that can be read by JavaScript.  Sites can read either signal.
 
 ### 3.1 Header
 
