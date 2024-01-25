@@ -14,7 +14,7 @@ Global Privacy Control (GPC) is a proposed specification designed to allow Inter
 - [3. Solution](#3-solution)
   - [3.1 Header](#31-header)
   - [3.2 Navigator Object](#32-navigator-object)
-  - [3.3 Signal Behavior](#33-signal-behavior)
+  - [3.3 Signal Semantics](#33-signal-semantics)
 - [4. Legal Effects](#4-legal-effects)
   - [4.1 GPC in the US](#41-gpc-in-the-us)
   - [4.2 GPC outside the US](#42-gpc-outside-the-us)
@@ -48,27 +48,29 @@ The specification also provides an option for sites to provide a GPC Support Res
 
 The GPC signal is either on or not present. If it is on, then an individual is expressing a privacy choice, for example, to opt out of the sale and data sharing per the California Consumer Privacy Act (CCPA). Sites may choose to support this request beyond what they are legally required to do and their vendors may choose to do so as well.
 
-Requests from a device or browser that supports GPC and where people have activated the GPC signal must contain **both** the header and an addition to the navigator object readable by JavaScript.
+If someone expresses a preference for their information to not be sold or shared, a device or browser that supports the feature will enable GPC signals.  GPC is signaled with an HTTP header and a property that can be read by JavaScript.  Sites can read either signal.
 
 ### 3.1 Header
 
-The following header **must** be on every request:
+When GPC is enabled, a browser includes the following header field in all requests that it makes:
 
-`Sec-GPC: 1`
+```http-message
+Sec-GPC: 1
+```
+
+This signal will be absent when no preference has been expressed or where GPC has been disabled.
 
 ### 3.2 Navigator Object
 
-The property that is added to the navigator object is
+Browsers that support JavaScript will expose `navigator.globalPrivacyControl`.  If `navigator.globalPrivacyControl` is `true`, then GPC has been enabled.
 
-`navigator.globalPrivacyControl`
+The `navigator.globalPrivacyControl` attribute will be present and have a value of `false` if the browser supports GPC but there has either been no preference expressed or GPC has been disabled.  This attribute will be absent only if the browser does not support GPC.
 
-Its value will always be `true` or the property will not be set. **The signal is expected to be active at the time the page loads.**
+### 3.3 Signal Semantics
 
-### 3.3 Signal Behavior
+When GPC is enabled, the browser is expressing a [do-not-sell-or-share preference](https://privacycg.github.io/gpc-spec/#dfn-preference).  These signals are direct requests to sites to respect that preference.
 
-The signal is always either **present and true** or **not present**. This design is rooted in providing full clarity of the signal.
-
-The specification presents this design to assure that there can be no mistake in understanding the intent or state of the signal. If the signal is active, it is expected that it is expressing an individual’s privacy choice.
+The specification presents this design to ensure that there can be no mistake in understanding the intent or state of the signal. If the signal is active, it expresses an individual’s privacy choice.
 
 ### 3.4 GPC Support Resource
 
@@ -76,7 +78,9 @@ The GPC Support Resource should be at `https://{yourwebsite.com}/.well-known/gpc
 
 A website that is intending to listen to and take action based on the GPC signal in any way should have the following style object in that JSON file:
 
-`{ "gpc": true, "lastUpdate": "1997-03-10" }`
+```json
+{ "gpc": true, "lastUpdate": "1997-03-10" }
+```
 
 The `lastUpdate` value is meant to reflect your understanding of the specification. If the specification changes in such a way as to not be backwards compatible, this value gives adopters the capacity to note their understanding of the signal being based on the state of the GPC specification at the particular time they last updated the file.
 
@@ -120,25 +124,25 @@ Whichever user interface applications are implemented, they are expected to meet
 
 User interfaces are further expected to have a clear visible switch for turning on the GPC signal that can clearly distinguish between active and inactive. **For GPC "active" always means an individual is exercising their choice to opt out of sharing and cross-site usage to the extent provided by the law.**
 
-![OptMeowt Popup](assets/images/OptMeowt_Popup.png)  
+![OptMeowt Popup](assets/images/OptMeowt_Popup.png)
 The OptMeowt popup showing GPC details of the current site.
 
 User-agents may choose to allow people to manage the GPC signal for individual domains. The Individual domains can be represented to the user as a list that clearly indicates their settings. In such a list people may be able to add individual domains, domains may be automatically added, and people may manage domains on which they have already made an active choice, or exclude domains from the GPC opt out signal being active. When people choose a GPC setting for a site, it is expected that the user-agent retain that setting until they make an active choice to change it.
 
-![OptMeowt Domain List](assets/images/OptMeowt_Domain_List.png)  
+![OptMeowt Domain List](assets/images/OptMeowt_Domain_List.png)
 The OptMeowt domain list for setting GPC on individual sites.
 
 It is expected that most people will choose if they want to universally activate GPC across all domains and requests. Interfaces should reflect GPC’s intent to be as straightforward and simple as possible. People may also choose to disable GPC universally for their user-agent.
 
-![OptMeowt Universal Setting](assets/images/OptMeowt_Universal_Setting.png)  
+![OptMeowt Universal Setting](assets/images/OptMeowt_Universal_Setting.png)
 The universal GPC setting of OptMeowt.
 
-![Firefox Universal Setting](assets/images/Firefox_Universal_Setting.png)  
+![Firefox Universal Setting](assets/images/Firefox_Universal_Setting.png)
 The universal setting of GPC in the Firefox browser settings.
 
 A user interface can show what response is at `https://{yourwebsite.com}/.well-known/gpc.json` and display that information to the users so they can understand what claims the website is making in terms of GPC compliance. This can be done regardless of the properties included on the JSON document, the main concern is the value of the `gpc` property, as seen here.
 
-![OptMeowt GPC Response](assets/images/OptMeowt_GPC_Response.png)  
+![OptMeowt GPC Response](assets/images/OptMeowt_GPC_Response.png)
 An example of how GPC responses can be surfaced (OptMeowt).
 
 ### 6.2 User-agents
