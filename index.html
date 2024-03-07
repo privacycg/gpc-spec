@@ -399,70 +399,66 @@
         For example, the use of the GPC signal by an individual will be intended to communicate the
         individual's intention to invoke the following rights, as applicable:
       </p>
-      <ul>
-        <li>
-          <p>
-            Under the CCPA, the GPC signal will be intended to communicate a Do Not Sell request
-            from a global privacy control, as per [[?CCPA-REGULATIONS]] §999.315 for that browser or
-            device, or, if known, the consumer.
-          </p>
-          <p>
-            Where the GPC signal conflicts with the existing privacy settings a consumer has with
-            the business, the business shall respect the GPC signal but may notify the consumer of
-            the conflict and give the consumer an opportunity to confirm the business-specific
-            privacy setting or participation in the financial incentive program [[?CCPA-REGULATIONS]]
-            §999.315(c)(2).
-          </p>
-        </li>
-        <li>
-          The Colorado Privacy Act (CPA) gives consumers the legal right to opt out of both the sale
-          of their information as well as the use of their data for cross-site targeted advertising,
-          including through the use of “universal opt-out mechanisms that clearly communicate a
-          consumer’s affirmative, freely given, and unambiguous choice to opt out.” Under the CPA, the
-          GPC signal will be intended to communicate a request to opt out of both the sale of their
-          personal information and the use of their personal information for targeted advertising.
-        </li>
-        <li>
-          Similarly, the Connecticut Data Privacy Act (CDPA) gives consumers separate opt-out rights
-          for data sales and targeted advertising, including through an “authorized agent by way of,
-          among other things, a technology, including, but not limited to, an Internet link or a
-          browser setting, browser extension or global device setting.” Under the CDPA, the GPC signal
-          will be intended to communicate a request to opt out of both the sale of their personal
-          information and the use of their personal information for targeted advertising.
-        </li>
-      </ul>
+      <h3>Calfornia Consumer Privacy Act (CCPA)</h3>
       <p>
-        GPC could potentially be used to indicate rights in other jurisdictions as well. For example:
+        Under the CCPA, the GPC signal will be intended to communicate a Do Not Sell request
+        from a global privacy control, as per [[?CCPA-REGULATIONS]] §999.315 for that browser or
+        device, or, if known, the consumer.
       </p>
-      <ul>
-        <li>
-          <p>
-            Under NRS 603A, a GPC signal will be intended to communicate a Do Not Sell My Personal
-            Information request [[?SB220]].
-          </p>
-        </li>
-        <li>
-          <p>
-            The GDPR requires that "Natural persons should have control of their own personal data"
-            ([[?GDPR]], Recital 7). The GPC signal is intended to convey a general request that data
-            controllers limit the sale or sharing of the person's personal data to other data
-            controllers ([[?GDPR]] Articles 7 &amp; 21). This request is expressed with every
-            interaction that the user agent has with the server.
-          </p>
-          <p>
-            Note that this request is not meant to withdraw a person's consent to local storage as per
-            the ePrivacy Directive ("cookie consent") ([[?EPRIVACY-DIRECTIVE]]) nor is it intended to
-            object to direct marketing under legitimate interest ([[?GDPR]]).
-          </p>
-        </li>
-        <li>
-          Other state privacy laws, such as those in Virginia and Utah, give consumers new opt-out
-          rights around data sales and targeted advertising but are silent on the legal effect of
-          global opt-out signals. Regulators enforcing those statutes may determine that a user
-          activating a signal such as GPC may be sufficient to legally exercise opt-out rights in
-          those jurisdictions.
-        </li>
-      </ul>
+      <p>
+        Where the GPC signal conflicts with the existing privacy settings a consumer has with
+        the business, the business shall respect the GPC signal but may notify the consumer of
+        the conflict and give the consumer an opportunity to confirm the business-specific
+        privacy setting or participation in the financial incentive program [[?CCPA-REGULATIONS]]
+        §999.315(c)(2).
+      </p>
+      <h3>Colorado Privacy Act (CPA)</h3>
+      <p>
+        The CPA gives consumers the legal right to opt out of both the sale of their information 
+        as well as the use of their data for cross-site targeted advertising, including through 
+        the use of “universal opt-out mechanisms that clearly communicate a consumer’s affirmative, 
+        freely given, and unambiguous choice to opt out.” Under the CPA, the GPC signal will be 
+        intended to communicate a request to opt out of both the sale of their personal information
+        and the use of their personal information for targeted advertising.
+      </p>
+      <h3>Connecticut Data Privacy Act (CDPA)</h3>
+      <p>
+        Similarly, the CDPA gives consumers separate opt-out rights for data sales and targeted 
+        advertising, including through an “authorized agent by way of, among other things, a 
+        technology, including, but not limited to, an Internet link or a browser setting, browser 
+        extension or global device setting.” Under the CDPA, the GPC signal will be intended to 
+        communicate a request to opt out of both the sale of their personal information and the 
+        use of their personal information for targeted advertising.
+      </p>
+      <h3>Nevada Revised Statutes Chapter 603A (NRS 603A)</h3>
+      <p>
+        Under NRS 603A, a GPC signal will be intended to communicate a Do Not Sell My Personal
+        Information request [[?SB220]].
+      </p>
+      <h3>General Data Protection Regulation (GDPR)</h3>
+      <p>
+        The GDPR requires that "Natural persons should have control of their own personal data"
+        ([[?GDPR]], Recital 7). The GPC signal is intended to convey a general request that data
+        controllers limit the sale or sharing of the person's personal data to other data
+        controllers ([[?GDPR]] Articles 7 &amp; 21). This request is expressed with every
+        interaction that the user agent has with the server.
+      </p>
+      <p>
+        Note that this request is not meant to withdraw a person's consent to local storage as per
+        the ePrivacy Directive ("cookie consent") ([[?EPRIVACY-DIRECTIVE]]) nor is it intended to
+        object to direct marketing under legitimate interest ([[?GDPR]]).
+      </p>
+      <h3>Other Jurisdictions and Privacy Rights</h3>
+      <p>
+        GPC could potentially be used to indicate rights in other jurisdictions as well.
+      </p>
+      <p>
+        Other US state privacy laws, such as those in Virginia and Utah, give consumers new opt-out
+        rights around data sales and targeted advertising but are silent on the legal effect of
+        global opt-out signals. Regulators enforcing those statutes may determine that a user
+        activating a signal such as GPC may be sufficient to legally exercise opt-out rights in
+        those jurisdictions.
+      </p>
       <p>
         However, GPC is not necessarily intended to invoke every new privacy right in every
         jurisdiction. For example, GPC is not intended to globally invoke data deletion rights on
