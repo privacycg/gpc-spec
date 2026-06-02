@@ -335,9 +335,12 @@
     <section>
       <h2>GPC Support Resource</h2>
       <p>
-        An origin MAY produce a resource at a .well-known URL to indicate
-        whether information collected by and on pages served from the
-        origin is protected by Global Privacy Control.
+        An origin MAY produce a resource at a .well-known URL to represent the fact
+        that it abides by GPC requests, at least where required to do so. The purpose
+        of a GPC support resource is for an origin to convey its awareness of and
+        support for the Global Privacy Control on pages served from the origin. The
+        support resource is not intended to convey whether the origin abides by GPC
+        requests from the user agent accessing the resource.
         By default, an origin's support is <em>unknown</em>.
       </p>
       <p>
