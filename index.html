@@ -61,7 +61,7 @@
         shortName: 'gpc',
         group: "wg/privacy",
         github: 'w3c/gpc',
-        xref: ['html', 'webdriver', 'privacy-principles'],
+        xref: ['html', 'webdriver', 'privacy-principles', 'service-workers'],
         localBiblio: {
           'CCPA-AG-FINAL-STATEMENT': {
             title: 'California Attorney General CCPA Final Statement of Reasons',
@@ -119,7 +119,7 @@
       <p>
         Several different legal frameworks have been proposed or enacted by jurisdictions around
         the world to address this concern. Some models rely upon user consent for tracking. Other
-        models based on the principle of data minimization simply prohibit certain data sharing or 
+        models based on the principle of data minimization simply prohibit certain data sharing or
         data processing entirely.
       </p>
       <p>
@@ -309,6 +309,7 @@
           };
           Navigator includes GlobalPrivacyControl;
           WorkerNavigator includes GlobalPrivacyControl;
+          ServiceWorkerGlobalScope includes GlobalPrivacyControl;
         </pre>
         <p>
           The value is <code>false</code> if no <code>Sec-GPC</code> header field would be sent;
@@ -409,7 +410,7 @@
         have legal effects, depending on factors such as the location of the individual sending the
         signal, the scope of the applicable law, as well as any separate agreement between the
         recipient of the signal and the individual. However, GPC is not necessarily intended to invoke
-        every new privacy right in every jurisdiction. For additional details on legal effects, 
+        every new privacy right in every jurisdiction. For additional details on legal effects,
         <a href="https://w3c.github.io/gpc/explainer" target="_blank">consult the Legal and
         Implementation Considerations Guide</a>.
       </p>
@@ -472,7 +473,7 @@
           This document does not specify what information must be presented to a user before activating
           GPC. When a user agent promotes a privacy feature or offers a privacy setting, it can make the
           determination if it is appropriate to send GPC based on what has been disclosed to the user.
-          
+
           User agents SHOULD strive to represent what the user agent best believes to be the person's
           preference for the Global Privacy Control value. While studies have shown that most people do not
           want their data sold or shared, some jurisdictions have enacted "opt-out" legal frameworks
@@ -517,10 +518,10 @@
       <p>
         Exposing a user's preference (in the HTTP header field or {{Window/navigator}} object)
         potentially divides users into two groups in a way that might increase the information
-        available for browser or device fingerprinting. This additional information is available 
-        unless the signal perfectly correlates with other signals or is turned on in a 
-        non-configurable setting. Thus, depending on the implementation, the GPC signal may impose 
-        a privacy cost, though, one intended to be justified by the privacy benefit of sending the 
+        available for browser or device fingerprinting. This additional information is available
+        unless the signal perfectly correlates with other signals or is turned on in a
+        non-configurable setting. Thus, depending on the implementation, the GPC signal may impose
+        a privacy cost, though, one intended to be justified by the privacy benefit of sending the
         signal.
       </p>
     </section>
